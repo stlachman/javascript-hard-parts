@@ -68,3 +68,45 @@ addByTwo(1);
 // now call addByTwo with an input of 2
 addByTwo(2);
 //should return 4
+
+// Extension: Challenge 5
+function once(func) {
+  // callback as input = return function sum with parameter 2
+  let counter = 0;
+  let storedValue;
+  return function(input) {
+    if (counter < 1) {
+      counter++;
+      storedValue = func(input);
+      return func(input);
+    } else {
+      return storedValue;
+    }
+  };
+}
+
+var onceFunc = once(addByTwo);
+
+// UNCOMMENT THESE TO TEST YOUR WORK!
+console.log(onceFunc(4)); //should log 6
+// console.log(onceFunc(10));  //should log 6
+// console.log(onceFunc(9001));  //should log 6
+
+function after(count, func) {
+  let counter = 0;
+  return function() {
+    console.log(counter);
+    counter++;
+    if (count == counter) {
+      return func();
+    }
+  };
+}
+
+var called = function() {
+  console.log("hello");
+};
+var afterCalled = after(3, called);
+
+afterCalled(); // -> nothing is printed
+afterCalled(); // -> nothing is printed
