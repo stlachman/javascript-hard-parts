@@ -95,7 +95,6 @@ console.log(onceFunc(4)); //should log 6
 function after(count, func) {
   let counter = 0;
   return function() {
-    console.log(counter);
     counter++;
     if (count == counter) {
       return func();
@@ -110,3 +109,10 @@ var afterCalled = after(3, called);
 
 afterCalled(); // -> nothing is printed
 afterCalled(); // -> nothing is printed
+
+// Extension: Challenge 6
+function delay(func, wait) {
+  setTimeout(func, wait);
+}
+const sayHello = () => console.log("hello");
+delay(sayHello, 500);
