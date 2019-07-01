@@ -85,3 +85,114 @@ function changeBackground() {
   console.log("clicked #2");
   changeColor();
 }
+
+// Challenge 6
+console.log("Start of Challenge 6");
+var dataReceived;
+
+function ajaxSimulate(id, callback) {
+  var database = ["Aaron", "Barbara", "Chris"];
+  setTimeout(callback(database[id]), 0);
+}
+// ...your code below
+
+function storeData(data) {
+  dataReceived = data;
+}
+
+ajaxSimulate(1, storeData);
+console.log(dataReceived);
+
+console.log("End of Challenge 6");
+
+// Challenge 7
+
+// Fetch API
+const url = "https://rest.bandsintown.com/artists/radiohead?app_id=jshp";
+
+fetch(url)
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(myJson) {
+    display(myJson);
+  });
+
+const container = document.getElementById("ch2");
+async function display(data) {
+  const message = await data;
+  const bandImg = document.createElement("img");
+  bandImg.src = message.image_url;
+  container.append(bandImg);
+}
+
+display(data);
+
+// XML Request Obj
+const Http = new XMLHttpRequest();
+const url = "https://rest.bandsintown.com/artists/radiohead?app_id=jshp";
+Http.open("GET", url);
+Http.send();
+
+Http.onreadystatechange = function() {
+  if (this.readyState === 4 && this.status === 200) {
+    handleRequest(JSON.parse(Http.responseText));
+  }
+};
+
+const container = document.getElementById("ch2");
+
+function handleRequest(data) {
+  const bandImg = document.createElement("img");
+  bandImg.src = data.image_url;
+  container.append(bandImg);
+}
+
+// Challenge 8
+const Http = new XMLHttpRequest();
+const url =
+  "https://rest.bandsintown.com/artists/iron%20and%20wine/events?app_id=jshp&date=upcoming";
+Http.open("GET", url);
+Http.send();
+
+Http.onreadystatechange = function() {
+  if (this.readyState === 4 && this.status === 200) {
+    handleRequest(JSON.parse(Http.responseText));
+  }
+};
+
+const container = document.getElementById("ch2");
+
+function handleRequest(data) {
+  for (let i = 0; i < data.length; i++) {
+    let item = document.createElement("div");
+    item.append(data[i].venue.name);
+    container.append(item);
+  }
+}
+
+// Challenge 9
+const Http = new XMLHttpRequest();
+const url =
+  "https://rest.bandsintown.com/artists/iron%20and%20wine/events?app_id=jshp&date=upcoming";
+Http.open("GET", url);
+Http.send();
+
+Http.onreadystatechange = function() {
+  if (this.readyState === 4 && this.status === 200) {
+    handleRequest(JSON.parse(Http.responseText));
+  }
+};
+
+const container = document.getElementById("ch2");
+
+function handleRequest(data) {
+  for (let i = 0; i < data.length; i++) {
+    console.log(data);
+    let item = document.createElement("div");
+    if (data[i].venue.country === "United States") {
+      item.append(data[i].venue.city);
+      container.append(item);
+    }
+  }
+}
