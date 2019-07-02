@@ -188,7 +188,6 @@ const container = document.getElementById("ch2");
 
 function handleRequest(data) {
   for (let i = 0; i < data.length; i++) {
-    console.log(data);
     let item = document.createElement("div");
     if (data[i].venue.country === "United States") {
       item.append(data[i].venue.city);
