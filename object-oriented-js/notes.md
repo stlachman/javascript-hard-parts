@@ -51,3 +51,27 @@ let user2 = userCreator("Tim", 5);
 user1.increment();
 user2.increment();
 ```
+
+## Prototypal natue of JS
+
+```js
+function userCreator(name, score) {
+  let newUser = Object.create(userFunctionStore);
+  newUser.name = name;
+  newUser.score = score;
+  return newUser;
+}
+
+let userFunctionStore = {
+  increment: function() {
+    this.score++;
+  },
+  login: function() {
+    console.log("You're logged in");
+  }
+};
+
+let user1 = userCreator("Will", 3);
+let user2 = userCreator("Tim", 5);
+user1.increment();
+```
