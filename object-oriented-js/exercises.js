@@ -98,3 +98,77 @@ PersonConstructor.prototype.introduce = function() {
 };
 
 mike.introduce(); // -> Logs 'Hi, my name is Mike'
+
+/****************************************************************
+                        USING ES6 CLASSES
+****************************************************************/
+
+/*** CHALLENGE 1 of 3 ***/
+
+class PersonClass {
+  constructor(name) {
+    this.name = name;
+  }
+
+  greet() {
+    console.log("hello");
+  }
+}
+
+// /********* Uncomment this line to test your work! *********/
+var george = new PersonClass();
+george.greet(); // -> Logs 'hello'
+
+/*** CHALLENGE 2 of 2 ***/
+class DeveloperClass extends PersonClass {
+  constructor(name) {
+    super(name);
+  }
+
+  introduce() {
+    console.log(`Hello World, my name is ${this.name}`);
+  }
+}
+
+// add code here
+
+// /********* Uncomment these lines to test your work! *********/
+var thai = new DeveloperClass("Thai", 32);
+console.log(thai.name); // -> Logs 'Thai'
+thai.introduce(); //-> Logs 'Hello World, my name is Thai'
+
+/****************************************************************
+                      EXTENSION: SUBCLASSING
+****************************************************************/
+
+var userFunctionStore = {
+  sayType: function() {
+    console.log("I am a " + this.type);
+  }
+};
+
+function userFactory(name, score) {
+  let user = Object.create(userFunctionStore);
+  user.type = "User";
+  user.name = name;
+  user.score = score;
+  return user;
+}
+
+var adminFunctionStore = Object.create(userFunctionStore);
+
+function adminFactory(name, score) {
+  const admin = Object.assign(adminFunctionStore, userFactory(name, score));
+  admin.type = "Admin";
+  return admin;
+}
+
+/* Put code here for a method called sharePublicMessage*/
+adminFunctionStore.sharePublicMessage = function() {
+  console.log(`Welcome users!`);
+};
+
+var adminFromFactory = adminFactory("Eva", 5);
+
+adminFromFactory.sayType(); // -> Logs "I am a Admin"
+adminFromFactory.sharePublicMessage(); // -> Logs "Welcome users!"

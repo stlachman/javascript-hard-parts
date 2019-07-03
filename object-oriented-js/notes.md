@@ -75,3 +75,51 @@ let user1 = userCreator("Will", 3);
 let user2 = userCreator("Tim", 5);
 user1.increment();
 ```
+
+## New Keyword
+
+new keyword: creates an empty object and assigns it to this
+
+```js
+function User(name, score) {
+  this.name = name;
+  this.score = score;
+}
+
+User.prototype.increment = function() {
+  this.score++;
+};
+
+User.prototype.login = function() {
+  console.log("login");
+};
+
+let user1 = new User("Eva", 9);
+
+user1.increment();
+```
+
+new keyword is doing this behind the scenes
+this = Object.create(User.prototype)
+
+## Class Syntactic Sugar
+
+```js
+
+class User {
+  constructor(name, score) {
+    this.name = name;
+    this.score = score;
+  }
+  increment() {
+    this.score++;
+  }
+  login() {
+    console.log('login)
+  }
+}
+
+let user1 = new User("Eva", 9);
+
+user1.increment();
+```
